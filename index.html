@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الحتمية واللاحتمية في تفسير الظواهر الطبيعية</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="main-title">الحتمية واللاحتمية في تفسير الظواهر الطبيعية</h1>
+                <p class="subtitle">رحلة فلسفية وعلمية لفهم قوانين الطبيعة</p>
+                <div class="hero-decoration">
+                    <div class="atom-icon">⚛️</div>
+                    <div class="planet-icon">🌍</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="main-nav" id="mainNav">
+        <div class="container">
+            <ul class="nav-list">
+                <li><a href="#problem" class="nav-link">الإشكال</a></li>
+                <li><a href="#determinism" class="nav-link">الحتمية</a></li>
+                <li><a href="#critique1" class="nav-link">نقد الحتمية</a></li>
+                <li><a href="#indeterminism" class="nav-link">اللاحتمية</a></li>
+                <li><a href="#critique2" class="nav-link">نقد اللاحتمية</a></li>
+                <li><a href="#synthesis" class="nav-link">التركيب</a></li>
+                <li><a href="#conclusion" class="nav-link">الخلاصة</a></li>
+                <li><a href="#quiz" class="nav-link">الاختبار</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Section 1: الإشكال الفلسفي -->
+        <section id="problem" class="section section-problem">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">1️⃣</span>
+                    <h2 class="section-title">الإشكال الفلسفي</h2>
+                </div>
+                
+                <div class="content-card">
+                    <div class="problem-definition">
+                        <h3 class="subsection-title">🔍 تعريف الإشكال</h3>
+                        <p class="important-text">هل تخضع الظواهر الطبيعية لقوانين حتمية صارمة أم لقوانين احتمالية (لاحتمية)؟</p>
+                    </div>
+                    
+                    <div class="problem-reason">
+                        <h3 class="subsection-title">💡 سبب ظهور الإشكال</h3>
+                        <p>نجاح العلم الكلاسيكي ثم عجزه عن تفسير بعض الظواهر.</p>
+                    </div>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-icon">✅</div>
+                            <div class="timeline-content">
+                                <h4>العلم الكلاسيكي</h4>
+                                <p>نجاح باهر في تفسير الظواهر الكبيرة</p>
+                            </div>
+                        </div>
+                        <div class="timeline-arrow">⬅️</div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon">❌</div>
+                            <div class="timeline-content">
+                                <h4>الظواهر المجهرية</h4>
+                                <p>عجز عن التفسير والتنبؤ الدقيق</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: موقف الحتمية -->
+        <section id="determinism" class="section section-determinism">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">2️⃣</span>
+                    <h2 class="section-title">موقف الحتمية (العلم الكلاسيكي)</h2>
+                </div>
+
+                <div class="content-card">
+                    <div class="main-idea">
+                        <h3 class="subsection-title">💎 الفكرة الأساسية</h3>
+                        <p class="important-text">لكل ظاهرة سبب، ونفس الأسباب تؤدي إلى نفس النتائج.</p>
+                    </div>
+
+                    <div class="scientists">
+                        <h3 class="subsection-title">👨‍🔬 العلماء الرئيسيون</h3>
+                        <div class="scientists-grid">
+                            <div class="scientist-card">
+                                <div class="scientist-icon">🍎</div>
+                                <h4>إسحاق نيوتن</h4>
+                                <p>قوانين الحركة والجاذبية</p>
+                            </div>
+                            <div class="scientist-card">
+                                <div class="scientist-icon">🧮</div>
+                                <h4>بيير سيمون لابلاس</h4>
+                                <p>فكرة العقل الكلي المعرفة</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arguments">
+                        <h3 class="subsection-title">📊 الحجج العلمية</h3>
+                        
+                        <!-- Simulation 1: سقوط الأجسام -->
+                        <div class="simulation-container">
+                            <h4 class="simulation-title">⚙️ محاكاة: سقوط الأجسام (الحتمية)</h4>
+                            <div class="simulation-explanation">
+                                <p><strong>الشرح:</strong> عند إسقاط جسمين من نفس الارتفاع في نفس الظروف، يسقطان بنفس الطريقة ويصلان الأرض في نفس الوقت. هذا يثبت الحتمية.</p>
+                            </div>
+                            <div class="simulation-box">
+                                <canvas id="fallingObjectsCanvas" width="600" height="400"></canvas>
+                                <div class="simulation-controls">
+                                    <button class="btn-simulation" id="startFalling">▶️ تشغيل</button>
+                                    <button class="btn-simulation" id="stopFalling">⏸️ إيقاف</button>
+                                    <button class="btn-simulation" id="resetFalling">🔄 إعادة</button>
+                                </div>
+                                <div class="simulation-info">
+                                    <p>الارتفاع: <span id="heightDisplay">100m</span></p>
+                                    <p>السرعة: <span id="speedDisplay">0 m/s</span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Simulation 2: حركة الكواكب -->
+                        <div class="simulation-container">
+                            <h4 class="simulation-title">🌍 محاكاة: حركة الكواكب والتنبؤ بالكسوف</h4>
+                            <div class="simulation-explanation">
+                                <p><strong>الشرح:</strong> الكواكب تتحرك في مدارات محددة حول الشمس. يمكن التنبؤ بمواقعها بدقة عالية، مما يسمح بالتنبؤ بظواهر مثل الكسوف.</p>
+                            </div>
+                            <div class="simulation-box">
+                                <canvas id="planetsCanvas" width="600" height="400"></canvas>
+                                <div class="simulation-controls">
+                                    <button class="btn-simulation" id="startPlanets">▶️ تشغيل</button>
+                                    <button class="btn-simulation" id="stopPlanets">⏸️ إيقاف</button>
+                                    <button class="btn-simulation" id="resetPlanets">🔄 إعادة</button>
+                                </div>
+                                <div class="simulation-info">
+                                    <p>الوقت المنقضي: <span id="planetTime">0</span> يوم</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="laplace-demon">
+                            <h4 class="concept-title">🧠 فكرة "عقل لابلاس"</h4>
+                            <div class="concept-box">
+                                <p>لو امتلك كائن ما معرفة كاملة بموقع وسرعة كل جسيم في الكون في لحظة معينة، لاستطاع التنبؤ بالمستقبل وإعادة بناء الماضي بدقة تامة.</p>
+                                <div class="concept-icon">🔮</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: نقد الحتمية -->
+        <section id="critique1" class="section section-critique">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">3️⃣</span>
+                    <h2 class="section-title">نقد الحتمية</h2>
+                </div>
+
+                <div class="content-card critique-card">
+                    <div class="critique-content">
+                        <div class="critique-icon">⚠️</div>
+                        <h3 class="subsection-title">حدود الحتمية</h3>
+                        <ul class="critique-list">
+                            <li>عجز الفيزياء الكلاسيكية عن تفسير الظواهر المجهرية (الذرات والجسيمات دون الذرية)</li>
+                            <li>ظهور حدود التفسير الحتمي في عالم الكم</li>
+                            <li>اكتشاف سلوكيات غير متوقعة على المستوى الذري</li>
+                        </ul>
+                    </div>
+                    <div class="transition-note">
+                        <p>⬅️ هذا العجز أدى إلى ظهور نظريات جديدة...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: موقف اللاحتمية -->
+        <section id="indeterminism" class="section section-indeterminism">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">4️⃣</span>
+                    <h2 class="section-title">موقف اللاحتمية (الفيزياء الحديثة)</h2>
+                </div>
+
+                <div class="content-card">
+                    <div class="main-idea">
+                        <h3 class="subsection-title">💎 الفكرة الأساسية</h3>
+                        <p class="important-text">بعض الظواهر لا يمكن التنبؤ بها إلا احتماليًا.</p>
+                    </div>
+
+                    <div class="scientists">
+                        <h3 class="subsection-title">👨‍🔬 العلماء الرئيسيون</h3>
+                        <div class="scientists-grid">
+                            <div class="scientist-card">
+                                <div class="scientist-icon">📊</div>
+                                <h4>فيرنر هايزنبرغ</h4>
+                                <p>مبدأ اللايقين (عدم التحديد)</p>
+                            </div>
+                            <div class="scientist-card">
+                                <div class="scientist-icon">⚛️</div>
+                                <h4>نيلز بور</h4>
+                                <p>التفسير الكوانتي للذرة</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arguments">
+                        <h3 class="subsection-title">📊 الحجج العلمية</h3>
+
+                        <div class="quantum-principle">
+                            <h4 class="concept-title">📐 مبدأ اللايقين لهايزنبرغ</h4>
+                            <div class="concept-box">
+                                <p>لا يمكن قياس موضع وسرعة جسيم دقيق (مثل الإلكترون) بدقة تامة في نفس الوقت. كلما زادت دقة قياس أحدهما، قلت دقة قياس الآخر.</p>
+                                <div class="formula">Δx · Δp ≥ ℏ/2</div>
+                            </div>
+                        </div>
+
+                        <!-- Simulation 3: سحابة احتمال الإلكترون -->
+                        <div class="simulation-container">
+                            <h4 class="simulation-title">⚛️ محاكاة: سحابة احتمال الإلكترون</h4>
+                            <div class="simulation-explanation">
+                                <p><strong>الشرح:</strong> الإلكترون لا يسلك مسارًا محددًا. نجده في سحابة احتمالية حول النواة. لا يمكن التنبؤ بموقعه الدقيق، بل فقط باحتمال وجوده في منطقة معينة.</p>
+                            </div>
+                            <div class="simulation-box">
+                                <canvas id="electronCanvas" width="600" height="400"></canvas>
+                                <div class="simulation-controls">
+                                    <button class="btn-simulation" id="startElectron">▶️ تشغيل</button>
+                                    <button class="btn-simulation" id="stopElectron">⏸️ إيقاف</button>
+                                    <button class="btn-simulation" id="resetElectron">🔄 إعادة</button>
+                                </div>
+                                <div class="simulation-info">
+                                    <p>عدد نقاط الاحتمال: <span id="electronCount">0</span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="wave-particle">
+                            <h4 class="concept-title">🌊 ازدواجية موجة/جسيم</h4>
+                            <div class="concept-box">
+                                <p>الإلكترون (والضوء) يظهر سلوك موجي وجسيمي في نفس الوقت. هذا السلوك المزدوج لا يمكن تفسيره بالفيزياء الكلاسيكية الحتمية.</p>
+                            </div>
+                        </div>
+
+                        <!-- Simulation 4: التحلل الإشعاعي -->
+                        <div class="simulation-container">
+                            <h4 class="simulation-title">☢️ محاكاة: التحلل الإشعاعي العشوائي</h4>
+                            <div class="simulation-explanation">
+                                <p><strong>الشرح:</strong> ذرات المادة المشعة تتحلل بشكل عشوائي. لا يمكن التنبؤ متى ستتحلل ذرة معينة، لكن يمكن معرفة النسبة المئوية التي ستتحلل في فترة زمنية محددة.</p>
+                            </div>
+                            <div class="simulation-box">
+                                <canvas id="radioactiveCanvas" width="600" height="400"></canvas>
+                                <div class="simulation-controls">
+                                    <button class="btn-simulation" id="startRadioactive">▶️ تشغيل</button>
+                                    <button class="btn-simulation" id="stopRadioactive">⏸️ إيقاف</button>
+                                    <button class="btn-simulation" id="resetRadioactive">🔄 إعادة</button>
+                                </div>
+                                <div class="simulation-info">
+                                    <p>الذرات المتبقية: <span id="atomsRemaining">100</span></p>
+                                    <p>الذرات المتحللة: <span id="atomsDecayed">0</span></p>
+                                    <p>الوقت: <span id="decayTime">0</span>s</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: نقد اللاحتمية -->
+        <section id="critique2" class="section section-critique">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">5️⃣</span>
+                    <h2 class="section-title">نقد اللاحتمية</h2>
+                </div>
+
+                <div class="content-card critique-card">
+                    <div class="critique-content">
+                        <div class="critique-icon">💡</div>
+                        <h3 class="subsection-title">تصحيح الفهم الخاطئ</h3>
+                        <ul class="critique-list">
+                            <li><strong>اللاحتمية لا تعني الفوضى:</strong> الظواهر الاحتمالية ليست عشوائية تمامًا، بل تتبع قوانين احتمالية دقيقة.</li>
+                            <li><strong>القوانين الاحتمالية ما زالت قوانين علمية:</strong> يمكن من خلالها التنبؤ بسلوك المجموعات الكبيرة من الجسيمات بدقة عالية.</li>
+                            <li>الاحتمال في الفيزياء الكمومية ليس نتيجة جهل، بل خاصية أساسية للطبيعة.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: التركيب -->
+        <section id="synthesis" class="section section-synthesis">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">6️⃣</span>
+                    <h2 class="section-title">التركيب (حل الإشكال)</h2>
+                </div>
+
+                <div class="content-card">
+                    <div class="synthesis-content">
+                        <h3 class="subsection-title">⚖️ الحتمية واللاحتمية مبدآن نسبيان</h3>
+                        <p class="important-text">لا تناقض حقيقي بين الحتمية واللاحتمية، بل لكل منهما مجال تطبيق:</p>
+                        
+                        <div class="comparison-grid">
+                            <div class="comparison-card deterministic">
+                                <div class="comparison-icon">🌍</div>
+                                <h4>العالم العياني (الكبير)</h4>
+                                <ul>
+                                    <li>حتمي</li>
+                                    <li>قوانين نيوتن</li>
+                                    <li>التنبؤ الدقيق ممكن</li>
+                                    <li>مثال: حركة الكواكب، سقوط الأجسام</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="comparison-arrow">⬅️⬅️</div>
+                            
+                            <div class="comparison-card quantum">
+                                <div class="comparison-icon">⚛️</div>
+                                <h4>العالم المجهري (الصغير)</h4>
+                                <ul>
+                                    <li>احتمالي</li>
+                                    <li>قوانين الكم</li>
+                                    <li>التنبؤ احتمالي فقط</li>
+                                    <li>مثال: سلوك الإلكترون، التحلل الإشعاعي</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="synthesis-note">
+                            <p>🔑 <strong>المفتاح:</strong> كلا المبدأين صحيح في سياقه. العلم لا يلغي أحدهما لصالح الآخر، بل يحدد مجال تطبيق كل منهما.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: الخلاصة -->
+        <section id="conclusion" class="section section-conclusion">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">7️⃣</span>
+                    <h2 class="section-title">الخلاصة</h2>
+                </div>
+
+                <div class="content-card conclusion-card">
+                    <div class="conclusion-content">
+                        <div class="conclusion-icon">🎓</div>
+                        <h3 class="subsection-title">الاستنتاج النهائي</h3>
+                        <div class="conclusion-points">
+                            <div class="conclusion-point">
+                                <span class="point-icon">📈</span>
+                                <p><strong>العلم يتطور:</strong> من الحتمية المطلقة إلى فهم أعمق يشمل الاحتمالية.</p>
+                            </div>
+                            <div class="conclusion-point">
+                                <span class="point-icon">🔄</span>
+                                <p><strong>لا إلغاء للحتمية بل تحديد مجالها:</strong> الحتمية لم تُلغَ، بل حُدّد نطاق صلاحيتها (العالم الكبير).</p>
+                            </div>
+                            <div class="conclusion-point">
+                                <span class="point-icon">🌟</span>
+                                <p><strong>التكامل:</strong> الفيزياء الحديثة تجمع بين الحتمية (للأجسام الكبيرة) واللاحتمية (للجسيمات الدقيقة).</p>
+                            </div>
+                            <div class="conclusion-point">
+                                <span class="point-icon">💡</span>
+                                <p><strong>الدرس الفلسفي:</strong> معرفتنا للطبيعة نسبية ومتطورة، وليست مطلقة ونهائية.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 8: الاختبار النهائي -->
+        <section id="quiz" class="section section-quiz">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">📝</span>
+                    <h2 class="section-title">الاختبار النهائي</h2>
+                </div>
+
+                <div class="quiz-container" id="quizContainer">
+                    <div class="quiz-intro" id="quizIntro">
+                        <h3>اختبر معلوماتك!</h3>
+                        <p>أجب عن 12 سؤالًا لتقييم فهمك للحتمية واللاحتمية</p>
+                        <button class="btn-start-quiz" id="startQuiz">🚀 ابدأ الاختبار</button>
+                    </div>
+
+                    <div class="quiz-questions" id="quizQuestions" style="display: none;">
+                        <div class="quiz-header">
+                            <div class="quiz-progress">
+                                <span>السؤال <span id="currentQuestion">1</span> من <span id="totalQuestions">12</span></span>
+                                <div class="progress-bar-quiz">
+                                    <div class="progress-fill-quiz" id="quizProgressFill"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="question-container" id="questionContainer">
+                            <!-- Questions will be inserted here dynamically -->
+                        </div>
+
+                        <div class="quiz-navigation">
+                            <button class="btn-quiz" id="nextQuestion">السؤال التالي ⬅️</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-results" id="quizResults" style="display: none;">
+                        <div class="results-content">
+                            <div class="results-icon" id="resultsIcon">🎉</div>
+                            <h3>النتيجة النهائية</h3>
+                            <div class="score-display">
+                                <div class="score-number">
+                                    <span id="finalScore">0</span>/<span id="totalScore">12</span>
+                                </div>
+                                <div class="score-percentage" id="scorePercentage">0%</div>
+                            </div>
+                            <div class="score-message" id="scoreMessage"></div>
+                            <div class="results-details">
+                                <div class="result-stat">
+                                    <span class="stat-icon">✅</span>
+                                    <span>إجابات صحيحة: <strong id="correctAnswers">0</strong></span>
+                                </div>
+                                <div class="result-stat">
+                                    <span class="stat-icon">❌</span>
+                                    <span>إجابات خاطئة: <strong id="wrongAnswers">0</strong></span>
+                                </div>
+                            </div>
+                            <button class="btn-retry" id="retryQuiz">🔄 إعادة المحاولة</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 - موقع تعليمي لتلاميذ البكالوريا الجزائرية</p>
+            <p>تم التطوير بـ ❤️ لخدمة العلم والمعرفة</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop">⬆️</button>
+
+    <script src="script.js"></script>
+</body>
+</html>

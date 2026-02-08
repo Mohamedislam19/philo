@@ -8,7 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
     initScrollToTop();
     initFallingObjectsSimulation();
     initPlanetsSimulation();
+    initPendulumSimulation();
     initElectronSimulation();
+    initDoubleSlitSimulation();
     initRadioactiveSimulation();
     initQuiz();
 });
@@ -364,7 +366,178 @@ function initPlanetsSimulation() {
 }
 
 // ===================================
-// محاكاة 3: سحابة احتمال الإلكترون
+// محاكاة 3: البندول البسيط
+// ===================================
+
+function initPendulumSimulation() {
+    const canvas = document.getElementById('pendulumCanvas');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    const startBtn = document.getElementById('startPendulum');
+    const stopBtn = document.getElementById('stopPendulum');
+    const resetBtn = document.getElementById('resetPendulum');
+    const angleDisplay = document.getElementById('pendulumAngle');
+    const cycleDisplay = document.getElementById('pendulumCycle');
+    
+    let animationId = null;
+    let isRunning = false;
+    
+    // خصائص البندول
+    const pivot = { x: canvas.width / 2, y: 80 };
+    const length = 200;
+    const gravity = 0.5;
+    const damping = 0.999;
+    let angle = Math.PI / 4; // 45 degrees
+    let angularVelocity = 0;
+    let cycles = 0;
+    let lastDirection = 1;
+    let trail = [];
+    
+    function draw() {
+        // مسح الشاشة
+        ctx.fillStyle = '#1e293b';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // رسم الخلفية
+        ctx.fillStyle = '#0f172a';
+        ctx.fillRect(0, 0, canvas.width, 60);
+        
+        // رسم مسار البندول
+        ctx.strokeStyle = 'rgba(96, 165, 250, 0.2)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(pivot.x, pivot.y, length, Math.PI * 0.15, Math.PI * 0.85);
+        ctx.stroke();
+        
+        // رسم أثر البندول
+        if (trail.length > 1) {
+            ctx.beginPath();
+            ctx.strokeStyle = 'rgba(96, 165, 250, 0.3)';
+            ctx.lineWidth = 3;
+            for (let i = 0; i < trail.length - 1; i++) {
+                const alpha = i / trail.length;
+                ctx.strokeStyle = `rgba(96, 165, 250, ${alpha * 0.5})`;
+                ctx.beginPath();
+                ctx.moveTo(trail[i].x, trail[i].y);
+                ctx.lineTo(trail[i + 1].x, trail[i + 1].y);
+                ctx.stroke();
+            }
+        }
+        
+        // حساب موضع الكرة
+        const bobX = pivot.x + Math.sin(angle) * length;
+        const bobY = pivot.y + Math.cos(angle) * length;
+        
+        // رسم نقطة التعليق
+        ctx.fillStyle = '#64748b';
+        ctx.fillRect(pivot.x - 40, 50, 80, 30);
+        ctx.fillStyle = '#94a3b8';
+        ctx.beginPath();
+        ctx.arc(pivot.x, pivot.y, 8, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // رسم الخيط
+        ctx.strokeStyle = '#f8fafc';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(pivot.x, pivot.y);
+        ctx.lineTo(bobX, bobY);
+        ctx.stroke();
+        
+        // رسم الكرة
+        const gradient = ctx.createRadialGradient(bobX - 5, bobY - 5, 5, bobX, bobY, 25);
+        gradient.addColorStop(0, '#3b82f6');
+        gradient.addColorStop(1, '#1d4ed8');
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(bobX, bobY, 25, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // حافة الكرة
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        // رسم علامات الزاوية
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '14px Cairo';
+        ctx.textAlign = 'center';
+        ctx.fillText('-45°', pivot.x - 150, pivot.y + length - 20);
+        ctx.fillText('0°', pivot.x, pivot.y + length + 40);
+        ctx.fillText('+45°', pivot.x + 150, pivot.y + length - 20);
+        
+        // رسم عنوان
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = 'bold 16px Cairo';
+        ctx.fillText('البندول البسيط - حركة دورية حتمية', canvas.width / 2, 35);
+    }
+    
+    function update() {
+        if (!isRunning) return;
+        
+        // معادلات الحركة للبندول
+        const angularAcceleration = -gravity / length * Math.sin(angle);
+        angularVelocity += angularAcceleration;
+        angularVelocity *= damping;
+        angle += angularVelocity;
+        
+        // حساب الدورات
+        const currentDirection = angularVelocity > 0 ? 1 : -1;
+        if (currentDirection !== lastDirection && Math.abs(angle) < 0.1) {
+            cycles += 0.5;
+        }
+        lastDirection = currentDirection;
+        
+        // تحديث الأثر
+        const bobX = pivot.x + Math.sin(angle) * length;
+        const bobY = pivot.y + Math.cos(angle) * length;
+        trail.push({ x: bobX, y: bobY });
+        if (trail.length > 50) trail.shift();
+        
+        // تحديث العرض
+        const angleDegrees = Math.round(angle * 180 / Math.PI);
+        angleDisplay.textContent = angleDegrees + '°';
+        cycleDisplay.textContent = Math.floor(cycles);
+        
+        draw();
+        animationId = requestAnimationFrame(update);
+    }
+    
+    function start() {
+        if (!isRunning) {
+            isRunning = true;
+            update();
+        }
+    }
+    
+    function stop() {
+        isRunning = false;
+        if (animationId) {
+            cancelAnimationFrame(animationId);
+        }
+    }
+    
+    function reset() {
+        stop();
+        angle = Math.PI / 4;
+        angularVelocity = 0;
+        cycles = 0;
+        trail = [];
+        angleDisplay.textContent = '45°';
+        cycleDisplay.textContent = '0';
+        draw();
+    }
+    
+    startBtn.addEventListener('click', start);
+    stopBtn.addEventListener('click', stop);
+    resetBtn.addEventListener('click', reset);
+    
+    draw();
+}
+
+// ===================================
+// محاكاة 4: سحابة احتمال الإلكترون
 // ===================================
 
 function initElectronSimulation() {
@@ -515,7 +688,257 @@ function initElectronSimulation() {
 }
 
 // ===================================
-// محاكاة 4: التحلل الإشعاعي
+// محاكاة 5: تجربة الشق المزدوج
+// ===================================
+
+function initDoubleSlitSimulation() {
+    const canvas = document.getElementById('doubleSlitCanvas');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    const startBtn = document.getElementById('startDoubleSlit');
+    const stopBtn = document.getElementById('stopDoubleSlit');
+    const resetBtn = document.getElementById('resetDoubleSlit');
+    const sentDisplay = document.getElementById('electronsSent');
+    const patternDisplay = document.getElementById('interferencePattern');
+    
+    let animationId = null;
+    let isRunning = false;
+    let electrons = [];
+    let screenHits = [];
+    let electronCount = 0;
+    
+    const slitWall = { x: 200, width: 20 };
+    const slit1Y = 160;
+    const slit2Y = 240;
+    const slitHeight = 30;
+    const screenX = 520;
+    
+    // توزيع احتمالي للتداخل
+    function getInterferenceY() {
+        // محاكاة نمط تداخل الشق المزدوج
+        const centerY = canvas.height / 2;
+        const maxAngle = Math.PI * 3;
+        const randomPhase = (Math.random() - 0.5) * maxAngle;
+        
+        // كثافة الاحتمال تتبع نمط التداخل
+        const intensity = Math.pow(Math.cos(randomPhase), 2);
+        const baseY = centerY + randomPhase * 25;
+        const scatter = (Math.random() - 0.5) * 30 * (1 - intensity);
+        
+        return Math.max(30, Math.min(canvas.height - 30, baseY + scatter));
+    }
+    
+    function draw() {
+        // مسح الشاشة
+        ctx.fillStyle = '#1e293b';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // رسم مصدر الإلكترونات
+        ctx.fillStyle = '#3b82f6';
+        ctx.beginPath();
+        ctx.arc(30, canvas.height / 2, 15, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#60a5fa';
+        ctx.beginPath();
+        ctx.arc(27, canvas.height / 2 - 3, 5, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // عنوان المصدر
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '12px Cairo';
+        ctx.textAlign = 'center';
+        ctx.fillText('مصدر', 30, canvas.height / 2 + 35);
+        
+        // رسم الجدار مع الشقين
+        ctx.fillStyle = '#64748b';
+        ctx.fillRect(slitWall.x, 0, slitWall.width, slit1Y - slitHeight / 2);
+        ctx.fillRect(slitWall.x, slit1Y + slitHeight / 2, slitWall.width, slit2Y - slit1Y - slitHeight);
+        ctx.fillRect(slitWall.x, slit2Y + slitHeight / 2, slitWall.width, canvas.height - slit2Y - slitHeight / 2);
+        
+        // تسميات الشقين
+        ctx.fillStyle = '#fbbf24';
+        ctx.font = 'bold 11px Cairo';
+        ctx.fillText('شق 1', slitWall.x + slitWall.width / 2, slit1Y - slitHeight / 2 - 5);
+        ctx.fillText('شق 2', slitWall.x + slitWall.width / 2, slit2Y + slitHeight / 2 + 15);
+        
+        // رسم الشاشة
+        ctx.fillStyle = '#1f2937';
+        ctx.fillRect(screenX, 0, 60, canvas.height);
+        ctx.strokeStyle = '#4b5563';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(screenX, 0, 60, canvas.height);
+        
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '12px Cairo';
+        ctx.fillText('شاشة الكشف', screenX + 30, 20);
+        
+        // رسم نقاط الاصطدام على الشاشة
+        screenHits.forEach(hit => {
+            ctx.fillStyle = `rgba(96, 165, 250, ${hit.alpha})`;
+            ctx.beginPath();
+            ctx.arc(hit.x, hit.y, 3, 0, Math.PI * 2);
+            ctx.fill();
+        });
+        
+        // رسم الإلكترونات المتحركة
+        electrons.forEach(e => {
+            // رسم موجة احتمالية
+            if (e.x < slitWall.x) {
+                ctx.strokeStyle = 'rgba(96, 165, 250, 0.3)';
+                ctx.lineWidth = 1;
+                for (let i = 0; i < 3; i++) {
+                    ctx.beginPath();
+                    ctx.arc(e.x, e.y, 10 + i * 5, 0, Math.PI * 2);
+                    ctx.stroke();
+                }
+            }
+            
+            // رسم الإلكترون
+            ctx.fillStyle = '#60a5fa';
+            ctx.beginPath();
+            ctx.arc(e.x, e.y, 4, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // إذا كان بعد الشقين، ارسم التداخل
+            if (e.x > slitWall.x + slitWall.width && e.x < screenX) {
+                ctx.strokeStyle = 'rgba(96, 165, 250, 0.2)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.arc(e.x, e.y, 8, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+        });
+        
+        // رسم الرسم البياني لنمط التداخل
+        if (screenHits.length > 50) {
+            drawInterferenceGraph();
+        }
+        
+        // رسم العنوان
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = 'bold 14px Cairo';
+        ctx.textAlign = 'right';
+        ctx.fillText('تجربة الشق المزدوج - إلكترون واحد يتداخل مع نفسه!', canvas.width - 10, canvas.height - 10);
+    }
+    
+    function drawInterferenceGraph() {
+        // رسم رسم بياني صغير للتداخل
+        const graphX = screenX + 65;
+        const graphWidth = 50;
+        
+        ctx.fillStyle = 'rgba(30, 41, 59, 0.9)';
+        ctx.fillRect(graphX - 5, 30, graphWidth + 10, canvas.height - 60);
+        
+        // حساب التوزيع
+        const bins = 20;
+        const binHeight = (canvas.height - 60) / bins;
+        const distribution = new Array(bins).fill(0);
+        
+        screenHits.forEach(hit => {
+            const bin = Math.floor((hit.y - 30) / binHeight);
+            if (bin >= 0 && bin < bins) {
+                distribution[bin]++;
+            }
+        });
+        
+        const maxCount = Math.max(...distribution, 1);
+        
+        // رسم الأعمدة
+        distribution.forEach((count, i) => {
+            const barWidth = (count / maxCount) * graphWidth;
+            const y = 30 + i * binHeight;
+            
+            ctx.fillStyle = `rgba(59, 130, 246, ${0.3 + (count / maxCount) * 0.7})`;
+            ctx.fillRect(graphX, y, barWidth, binHeight - 2);
+        });
+    }
+    
+    function update() {
+        if (!isRunning) return;
+        
+        // إضافة إلكترون جديد
+        if (Math.random() < 0.05 && electrons.length < 10) {
+            electronCount++;
+            electrons.push({
+                x: 50,
+                y: canvas.height / 2 + (Math.random() - 0.5) * 20,
+                targetY: getInterferenceY(),
+                speed: 3
+            });
+            sentDisplay.textContent = electronCount;
+        }
+        
+        // تحديث الإلكترونات
+        electrons = electrons.filter(e => {
+            e.x += e.speed;
+            
+            // التداخل بعد الشقين
+            if (e.x > slitWall.x + slitWall.width) {
+                const progress = (e.x - slitWall.x - slitWall.width) / (screenX - slitWall.x - slitWall.width);
+                const startY = canvas.height / 2;
+                e.y = startY + (e.targetY - startY) * progress;
+            }
+            
+            // وصول للشاشة
+            if (e.x >= screenX) {
+                screenHits.push({
+                    x: screenX + 5 + Math.random() * 50,
+                    y: e.y,
+                    alpha: 0.8
+                });
+                return false;
+            }
+            return true;
+        });
+        
+        // تحديث نمط التداخل
+        if (electronCount > 100) {
+            patternDisplay.textContent = 'واضح ✓';
+            patternDisplay.style.color = '#10b981';
+        } else if (electronCount > 30) {
+            patternDisplay.textContent = 'يتشكل...';
+            patternDisplay.style.color = '#fbbf24';
+        }
+        
+        draw();
+        animationId = requestAnimationFrame(update);
+    }
+    
+    function start() {
+        if (!isRunning) {
+            isRunning = true;
+            update();
+        }
+    }
+    
+    function stop() {
+        isRunning = false;
+        if (animationId) {
+            cancelAnimationFrame(animationId);
+        }
+    }
+    
+    function reset() {
+        stop();
+        electrons = [];
+        screenHits = [];
+        electronCount = 0;
+        sentDisplay.textContent = '0';
+        patternDisplay.textContent = 'قيد التشكل...';
+        patternDisplay.style.color = '#94a3b8';
+        draw();
+    }
+    
+    startBtn.addEventListener('click', start);
+    stopBtn.addEventListener('click', stop);
+    resetBtn.addEventListener('click', reset);
+    
+    draw();
+}
+
+// ===================================
+// محاكاة 6: التحلل الإشعاعي
 // ===================================
 
 function initRadioactiveSimulation() {
